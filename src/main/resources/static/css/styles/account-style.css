@@ -1,0 +1,136 @@
+.info-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    padding-bottom: 8px;
+    gap: 16px;
+}
+
+.account-header {
+    text-align: center;
+}
+
+.account-info {
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px 18px;
+}
+
+.account-info-label {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 16px 0 4px;
+}
+
+.account-info-value {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 4px 0 16px;
+}
+
+.record-info {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 18px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.record-info-title {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+}
+
+.record-info-value {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 4px 0 16px;
+}
+
+.record-master-name {
+    margin-bottom: 0;
+    
+}
+
+.record-master-qualification {
+    color: #959595;
+}
+
+.detail-title, .record-time-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 16px 0 4px;
+}
+
+.record-time-value {
+    margin-top: 0;
+}
+
+.account-controll-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.account-controll-buttons button {
+    flex: 1;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: all 300ms;
+}
+
+.account-logout {
+    color: black;
+    border: 2px var(--primary-color) solid;
+    background-color: transparent;
+}
+
+.account-logout:hover {
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.account-delete {
+    border: 2px red solid;
+    background-color: transparent;
+    color: red;
+}
+
+.account-delete:hover {
+    color: white;
+    background-color: red;
+}
+
+@media screen and (max-width: 768px) {
+
+    .account-header {
+        font-size: 1.5rem;
+        margin-left: 16px;
+    }
+
+    .restore-form {
+        padding: 20px 16px;
+    }
+
+    .restore-form label {
+        margin-bottom: 6px;
+    }
+
+    .restore-form input[type="text"],
+    .restore-form input[type="email"],
+    .restore-form input[type="password"] {
+        margin-bottom: 12px;
+    }
+
+    .restore-form input[type="submit"] {
+        padding: 10px 10px;
+    }
+
+    .record-info-title {
+        font-size: 1.3rem;
+    }
+
+}

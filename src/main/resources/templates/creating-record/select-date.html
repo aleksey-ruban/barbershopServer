@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="body">
+    <header class="header">
+        <div class="container header-container">
+            <a class="header-name" href="/templates/">
+                Brillant Barbershop
+            </a>
+            <div class="header-nav">
+                <button class="header-nav-elem header-contacts" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
+                    Контакты
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <h1 class="select-date-header">Выберите дату</h1>
+            <div class="calendar-container">
+                <div class="calendar-current-mounth">
+                    <p>Апрель</p>
+                    <div class="change-mounth">
+                        <button class="previous-mounth" onclick="loadPreviousMounth()"></button>
+                        <button class="next-mounth" onclick="loadNextMounth()"></button>
+                    </div>
+                </div>
+                <div class="calendar-weekdays-view">
+                    <p>Пн</p>
+                    <p>Вт</p>
+                    <p>Ср</p>
+                    <p>Чт</p>
+                    <p>Пт</p>
+                    <p>Сб</p>
+                    <p>Вс</p>
+                </div>
+                <div class="calendar-view"></div>
+            </div>
+            <h1 class="select-date-header select-time-header">Выберите Время</h1>
+            <div class="time-selection-container">
+                <div class="time-view">
+                    <div>9:00</div>
+                    <div>9:00</div>
+                    <div>9:00</div>
+                    <div>9:00</div>
+                    <div>9:00</div>
+                </div>
+                <button class="create-record-button">
+                    Готово
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-contacts">Контакты</div>
+            <div class="footer-address footer-header">
+                Адрес:
+                <div class="footer-address-value footer-value">
+                    123060, Россия<br>
+                    г. Москва,<br>
+                    ул. Маршала Бирюзова, 14
+                </div>
+            </div>
+            <div class="footer-telephone footer-header">
+                Телефон:
+                <div class="footer-telephone-value footer-value">
+                    <a href="tel:88000000000" class="footer-telephone-value footer-value">8 800 000 0000</a>
+                </div>
+            </div>
+            <div class="footer-email footer-header">
+                E-mail:
+                <div class="footer-email-value footer-value">
+                    <a href="mailto:info@brillantbarbershop.com"
+                        class="footer-telephone-value footer-value">info@brillantbarbershop.com</a>
+                </div>
+            </div>
+            <div class="footer-worktime footer-header">
+                График работы:
+                <div class="footer-worktime-value footer-value">
+                    Ежедневно 9:00 – 21:00
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 Алексей Рубан, ИКБО-30-22. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/static/js/select-date-script.js"></script>
+</body>
+
+</html>
