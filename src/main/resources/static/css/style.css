@@ -1,0 +1,436 @@
+@import url("/static/css/styles/signupStyle.css");
+@import url("/static/css/styles/signinStyle.css");
+@import url("/static/css/styles/restore-passwordStyle.css");
+@import url("/static/css/styles/select-master-style.css");
+@import url("/static/css/styles/select-service-style.css");
+@import url("/static/css/styles/select-date-style.css");
+@import url("/static/css/styles/account-style.css");
+
+:root {
+    --color: rgb(0, 0, 0);
+    --primary-color: rgb(29, 29, 29);
+    --accent-color: rgb(26, 101, 252);
+    --background-color: rgb(237, 242, 244);
+}
+
+* {
+    font-family: 'Onest', sans-serif;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.container {
+    margin: 0 80px;
+}
+
+
+/* –––––– HEADER PART –––––– */
+
+.header {
+    display: flex;
+    position: sticky;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    height: 100px;
+    top: 0;
+    z-index: 10;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-name {
+    display: flex;
+    flex: 0;
+    height: 100%;
+    min-width: max-content;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: uppercase;
+    transition: all 300ms;
+}
+
+.header-name:hover {
+    color: var(--accent-color);
+}
+
+.header-nav {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    gap: 30px;
+}
+
+.header-nav-elem {
+    padding: 0 34px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.header-contacts {
+    color: white;
+    background-color: transparent;
+    border: 2px white solid;
+}
+
+.header-contacts:hover {
+    color: black;
+    background-color: white;
+}
+
+.header-visit-master {
+    background-color: var(--accent-color);
+    color: white;
+    border: 2px transparent solid;
+}
+
+.header-visit-master:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px white solid;
+}
+
+/* –––––– END OF HEADER PART –––––– */
+
+
+
+/* –––––– MAIN PART –––––– */
+
+.main {
+    flex: 1;
+    background-color: var(--background-color);
+}
+
+.mainpage-container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.indexpage-main {
+    background-color: var(--primary-color);
+}
+
+.welcome-title-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0px auto 20px;
+    aspect-ratio: 5/3;
+    color: white;
+    text-transform: uppercase;
+    z-index: 0;
+}
+
+.welcome-title-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    background: url("/static/css/images/Barbershop-bristol__57803.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px var(--primary-color) solid;
+    z-index: -10;
+    filter: grayscale(60%) brightness(35%);
+}
+
+.welcome-title-container h1 {
+    color: var(--accent-color);
+    margin: 8px 0 24px 0;
+    font-size: 4.5rem;
+    font-weight: 1000;
+}
+
+.welcome-title-container p {
+    color: white;
+    margin: 0 0;
+}
+
+.welcome-title-net {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.welcome-title-wedo {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.promotions-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.promotions-container div {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: var(--accent-color);
+    color: white;
+    aspect-ratio: 2;
+    max-height: 160px;
+    padding: 12px;
+    border-radius: 6px;
+    background: radial-gradient(circle at 80px 30px, var(--accent-color), rgb(8, 31, 77));
+}
+
+.promotions-container div h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-top: 8px;
+    margin-left: 12px;
+    margin-bottom: 0;
+}
+
+.promotions-container div p {
+    font-size: 1.1rem;
+    margin: 12px;
+}
+
+.our-advantages-container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+}
+
+.facts-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0 20px;
+}
+
+.fact-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    width: 50%;
+}
+
+.fact-card > :nth-child(1) {
+    flex: 1;
+    text-align: center;
+    margin: 28px 0 0;
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.fact-card > :nth-child(2) {
+    padding: 0 26px;
+    margin-bottom: 20px;
+    line-height: 30px;
+}
+
+.visit-master-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: 4px transparent solid;
+    font-size: 1.3rem;
+    padding: 12px 42px;
+    max-width: fit-content;
+    margin: 18px auto 24px;
+    border-radius: 4px;
+    font-weight: 700;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.visit-master-button:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 4px var(--accent-color) solid;
+}
+
+.some-info-text {
+    padding: 36px;
+    line-height: 26px;
+    color: rgb(133, 133, 133);
+    padding-top: 10px;
+}
+
+/* –––––– END OF MAIN PART –––––– */
+
+
+
+
+/* –––––– FOOTER PART –––––– */
+
+.footer {
+    background-color: black;
+    padding: 40px 0 0 0;
+    color: white;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px auto auto;
+    gap: 0 50px;
+}
+
+.footer-contacts {
+    font-size: 1.5rem;
+    font-weight: 600;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    
+}
+
+.footer-header {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+
+.footer-value {
+    margin: 10px 0;
+    color: white;
+    text-transform: none;
+    font-weight: 100;
+     text-decoration: none;
+}
+
+.footer-copyright {
+    border-top: 1px white solid;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px 0 40px 0;
+    font-weight: 100;
+    font-size: 0.8rem;
+}
+
+/* –––––– END OF FOOTER PART –––––– */
+
+@media screen and (max-width: 768px) {
+
+    .container {
+        margin: 0 10px;
+    }
+
+    .mainpage-container {
+        margin: 20px 10px 30px;
+    }
+
+    .header {
+        height: 60px;
+        
+    }
+
+    .hidable-contacts {
+        display: none;
+    }
+    
+    .header-name {
+        font-size: 1rem;
+    }
+
+    .header-nav-elem {
+        font-size: 0.8rem;
+        padding: 0 16px;
+        font-weight: 500;
+    }
+
+    .footer-container {
+        grid-template-rows: 30px auto auto;
+        grid-template-columns: auto;
+        margin: 0 28px;
+        gap: 10px 0px;
+    }
+
+    .footer-contacts {
+        font-size: 1.3rem;
+    }
+
+    .footer-header {
+        font-size: 1rem;
+    }
+
+    .footer-value {
+        font-size: 0.9rem;
+        margin: 4px 0 10px 0;
+    }
+
+    .footer-copyright {
+        margin-top: 10px;
+        padding: 8px 0 16px 0;
+    }
+
+    .footer {
+        padding: 26px 0 0 0;
+    }
+
+    .welcome-title-container h1 {
+        margin: 8px 0 12px 0;
+        font-size: 2.4rem;
+    }
+    
+    .welcome-title-net {
+        font-size: 0.7rem;
+    }
+    
+    .welcome-title-wedo {
+        font-size: 1.05rem;
+    }
+
+    .welcome-title-container::before {
+        border: none;
+    }
+
+    .welcome-title-container {
+        aspect-ratio: 1;
+    }
+
+    .promotions-container div p {
+        font-size: 1rem;
+        line-height: 20px;
+    }
+
+    .promotions-container div {
+        max-height: none;
+    }
+
+    .facts-container {
+        flex-direction: column;
+    }
+
+    .facts-container > :nth-child(2) > :nth-child(1) {
+        margin-top: 12px;
+    }
+    
+    .fact-card {
+        width: 100%;
+    }
+}

@@ -1,0 +1,116 @@
+.select-master-header {
+    max-width: 600px;
+    margin: 30px auto 18px;
+}
+
+.masters-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    
+    border-radius: 4px;
+}
+
+.select-master-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.master-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px;
+    gap: 14px;
+}
+
+.any-master-card div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.any-master-card {
+    margin-bottom: 16px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.any-master-card img {
+    background-color: rgb(219, 219, 219);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.master-card input[type="radio"] {
+    margin: auto 16px;
+    width: 24px;
+    height: 24px;
+    accent-color: var(--primary-color);
+}
+
+.master-card img {
+    background-color: rgb(219, 219, 219);
+    border-radius: 50%;
+    padding: 10px;
+    height: 32px;
+    width: 32px;
+}
+
+.master-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-evenly;
+}
+
+.master-info p {
+    margin: 0;
+}
+
+.master-name {
+    font-weight: 900;
+}
+
+.master-qualification {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: rgb(118, 118, 118);
+}
+
+.select-service {
+    position: sticky;
+    bottom: 20px;
+    height: 45px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 4px;
+    margin-top: 24px;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.select-service:hover {
+    background-color: var(--primary-color);
+}
+
+@media screen and (max-width: 768px) {
+
+    .select-master-header {
+        font-size: 1.3rem;
+        margin-left: 16px;
+    }
+
+}
+
