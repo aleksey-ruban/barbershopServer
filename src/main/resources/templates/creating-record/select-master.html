@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,18 +6,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body class="body">
-    <header class="header">
-        <div class="container header-container">
-            <a class="header-name" href="/templates/">
-                Brillant Barbershop
-            </a>
-            <div class="header-nav">
-                <button class="header-nav-elem header-contacts" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
-                    Контакты
-                </button>
-            </div>
-        </div>
-    </header>
+    <div th:replace="~{parts/header :: header}"></div>
     <main class="main">
         <div class="container">
             <h1 class="select-master-header">Выберите специалиста</h1>
@@ -99,42 +88,9 @@
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-contacts">Контакты</div>
-            <div class="footer-address footer-header">
-                Адрес:
-                <div class="footer-address-value footer-value">
-                    123060, Россия<br>
-                    г. Москва,<br>
-                    ул. Маршала Бирюзова, 14
-                </div>
-            </div>
-            <div class="footer-telephone footer-header">
-                Телефон:
-                <div class="footer-telephone-value footer-value">
-                    <a href="tel:88000000000" class="footer-telephone-value footer-value">8 800 000 0000</a>
-                </div>
-            </div>
-            <div class="footer-email footer-header">
-                E-mail:
-                <div class="footer-email-value footer-value">
-                    <a href="mailto:info@brillantbarbershop.com"
-                        class="footer-telephone-value footer-value">info@brillantbarbershop.com</a>
-                </div>
-            </div>
-            <div class="footer-worktime footer-header">
-                График работы:
-                <div class="footer-worktime-value footer-value">
-                    Ежедневно 9:00 – 21:00
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2024 Алексей Рубан, ИКБО-30-22. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="~{parts/footer :: footer}"></div>
     <script src="/static/js/select-master-script.js"></script>
+    <script src="/static/js/show-contacts.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 "use strict";
 
 function showContacts() {
-    var url = "/templates/";
+    var url = "/";
     var queryString = '?show=' + "contacts";
     window.location.href = url + queryString;
 }
