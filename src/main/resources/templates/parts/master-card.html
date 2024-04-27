@@ -1,0 +1,8 @@
+<div th:fragment="masterCard" class="master-card" th:attr="data-master-id=${master.id}" onclick="selectMaster(event)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <img src="/static/css/images/person.svg" alt="">
+    <div class="master-info">
+        <p th:text="${master.name}" class="master-name">Антон</p>
+        <p th:text="${master.qualification}" class="master-qualification">Бренд-барбер сети Brillant</p>
+    </div>
+    <input type="radio", name="master" value="">
+</div>
