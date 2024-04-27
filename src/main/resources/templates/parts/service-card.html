@@ -1,0 +1,13 @@
+<div th:fragment="serviceCard" class="service-card" th:attr="data-service-id=${service.id}" onclick="selectService(event)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <img src="/static/css/images/service-preview.png" alt="">
+    <div class="service-info">
+        <div class="service-name-coast">
+            <p th:text="${service.name}" class="service-name">Мужская стрижка ножницами</p>
+            <p th:text="${service.coast} + ' ₽'" class="service-details">
+                1 500 ₽
+                <span th:text="${service.time} + ' мин'">1 ч</span>
+            </p>
+        </div>
+        <input type="checkbox", name="master" value="">    
+    </div>
+</div>

@@ -17,69 +17,8 @@
                     <input type="radio", name="master" value="any">
                 </div>
                 <div class="select-master-list">
-                    <div class="master-card" data-master-id="1" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="2" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="3" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="4" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="5" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="1" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="1" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
-                    </div>
-                    <div class="master-card" data-master-id="1" onclick="selectMaster(event)">
-                        <img src="/static/css/images/person.svg" alt="">
-                        <div class="master-info">
-                            <p class="master-name">Антон</p>
-                            <p class="master-qualification">Бренд-барбер сети Brillant</p>
-                        </div>
-                        <input type="radio", name="master" value="">
+                    <div th:each="master : ${masters}">
+                        <div th:replace="~{parts/master-card :: masterCard}"></div>
                     </div>
                 </div>
                 <button class="select-service">

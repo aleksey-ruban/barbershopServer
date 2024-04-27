@@ -12,44 +12,8 @@
             <h1 class="select-service-header">Выберите услуги</h1>
             <div class="services-container">
                 <div class="services-view">
-                    <div class="service-card" data-service-id="0" onclick="selectService(event)">
-                        <img src="/static/css/images/service-preview.png" alt="">
-                        <div class="service-info">
-                            <div class="service-name-coast">
-                                <p class="service-name">Мужская стрижка ножницами</p>
-                                <p class="service-details">
-                                    1 500 ₽
-                                    <span>1 ч</span>
-                                </p>
-                            </div>
-                            <input type="checkbox", name="master" value="">    
-                        </div>
-                    </div>
-                    <div class="service-card" data-service-id="1" onclick="selectService(event)">
-                        <img src="/static/css/images/service-preview.png" alt="">
-                        <div class="service-info">
-                            <div class="service-name-coast">
-                                <p class="service-name">Мужская стрижка ножницами</p>
-                                <p class="service-details">
-                                    1 500 ₽
-                                    <span>1 ч</span>
-                                </p>
-                            </div>
-                            <input type="checkbox", name="master" value="">    
-                        </div>
-                    </div>
-                    <div class="service-card" data-service-id="2" onclick="selectService(event)">
-                        <img src="/static/css/images/service-preview.png" alt="">
-                        <div class="service-info">
-                            <div class="service-name-coast">
-                                <p class="service-name">Мужская стрижка ножницами</p>
-                                <p class="service-details">
-                                    1 500 ₽
-                                    <span>1 ч</span>
-                                </p>
-                            </div>
-                            <input type="checkbox", name="master" value="">    
-                        </div>
+                    <div th:each="service : ${services}">
+                        <div th:replace="~{parts/service-card :: serviceCard}"></div>
                     </div>
                 </div>
                 <div class="services-total">
