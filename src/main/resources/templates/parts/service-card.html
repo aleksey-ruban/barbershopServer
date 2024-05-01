@@ -3,10 +3,10 @@
     <div class="service-info">
         <div class="service-name-coast">
             <p th:text="${service.name}" class="service-name">Мужская стрижка ножницами</p>
-            <p th:text="${service.coast} + ' ₽'" class="service-details">
+            <span th:text="${service.coast} + ' ₽'" class="service-details">
                 1 500 ₽
-                <span th:text="${service.time} + ' мин'">1 ч</span>
-            </p>
+            </span>
+            <span th:text="${service.time} + ' мин'">1 ч</span>
         </div>
         <input type="checkbox", name="master" value="">    
     </div>
