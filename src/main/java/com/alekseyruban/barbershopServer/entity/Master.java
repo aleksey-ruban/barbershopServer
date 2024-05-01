@@ -1,27 +1,21 @@
 package com.alekseyruban.barbershopServer.entity;
 
+import com.alekseyruban.barbershopServer.enums.MasterQualification;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-public class Client {
+public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String email;
-
-    private String password;
-
     private String name;
 
-    private Boolean isConfirmed;
+    @Enumerated(EnumType.STRING)
+    private MasterQualification qualification;
 
-    @OneToOne(mappedBy = "client")
-    private AuthorizationToken token;
-
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "master")
     private Set<Record> records;
 }
