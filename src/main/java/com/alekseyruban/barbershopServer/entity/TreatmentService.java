@@ -3,7 +3,7 @@ package com.alekseyruban.barbershopServer.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class ClientService {
+public class TreatmentService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -11,6 +11,4 @@ public class ClientService {
     private String name;
 
     private Integer duration;
-
-
 }
