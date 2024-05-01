@@ -21,7 +21,7 @@ public class Record {
     private Master master;
 
     @ManyToMany
-    private Set<ClientService> services;
+    private Set<TreatmentService> services;
 
     @Column(name = "date_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime dateTime;
