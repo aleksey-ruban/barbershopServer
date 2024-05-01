@@ -24,4 +24,6 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private Set<Record> records;
+
+    private String roles;
 }
