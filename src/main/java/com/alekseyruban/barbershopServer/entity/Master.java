@@ -2,10 +2,14 @@ package com.alekseyruban.barbershopServer.entity;
 
 import com.alekseyruban.barbershopServer.enums.MasterQualification;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
