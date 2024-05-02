@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorizationTokenRepository extends JpaRepository<AuthorizationToken, Long> {
-
+    AuthorizationToken findByToken(String token);
 }
