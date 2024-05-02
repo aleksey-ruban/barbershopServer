@@ -27,6 +27,9 @@ dependencies {
 
 	runtimeOnly 'org.postgresql:postgresql'
 
+	implementation 'javax.mail:javax.mail-api:1.6.2'
+	implementation 'com.sun.mail:javax.mail:1.6.2'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 }
