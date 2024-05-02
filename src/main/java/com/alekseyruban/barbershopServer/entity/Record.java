@@ -1,11 +1,15 @@
 package com.alekseyruban.barbershopServer.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
