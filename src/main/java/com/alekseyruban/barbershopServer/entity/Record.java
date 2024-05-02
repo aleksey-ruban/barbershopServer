@@ -6,17 +6,16 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@IdClass(RecordKey.class)
 public class Record {
     @Id
-    private Long recordId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;
 
