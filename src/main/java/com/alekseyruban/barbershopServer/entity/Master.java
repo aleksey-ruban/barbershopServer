@@ -16,6 +16,6 @@ public class Master {
     @Enumerated(EnumType.STRING)
     private MasterQualification qualification;
 
-    @OneToMany(mappedBy = "master")
+    @OneToMany(mappedBy = "master", cascade = CascadeType.ALL)
     private Set<Record> records;
 }
