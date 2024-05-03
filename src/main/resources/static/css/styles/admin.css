@@ -137,3 +137,44 @@ select:focus {
     background-color: transparent;
     color: red;
 }
+
+@media screen and (max-width: 768px) {
+
+    #body-admin {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .actions-container {
+        flex-direction: column;
+        margin: 20px 18px 20px;
+    }
+
+    .action-card {
+        height: auto;
+        width: 100%;
+        padding: 8px 18px 20px;
+    }
+
+    .admin-page-button {
+        display: inline-block;
+        line-height: 28px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 300ms;
+        cursor: pointer;
+        color: white;
+        background-color: transparent;
+        border: 1px white solid;
+        text-decoration: none;
+    }
+
+    #header-nav-admin {
+        gap: 8px;
+    }
+
+}
