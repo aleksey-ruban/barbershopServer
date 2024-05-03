@@ -12,7 +12,7 @@
     <main class="main">
         <div class="container">
             <h1 class="signup-header">Создайте свой аккаунт</h1>
-            <form action="/registration" method="post" class="signup-form">
+            <form action="/authorization/signup" method="post" class="signup-form" onsubmit="return validateForm()">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" required placeholder="Введите имя">
 
@@ -36,6 +36,18 @@
     </main>
     <div th:replace="~{parts/footer :: footer}"></div>
     <script src="/static/js/show-contacts.js"></script>
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            if (password !== confirmPassword) {
+                alert("Пароли не совпадают");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 
 </html>
