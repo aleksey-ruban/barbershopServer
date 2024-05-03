@@ -14,4 +14,13 @@ public enum MasterQualification {
     public String toString() {
         return this.qualification;
     }
+
+    public static MasterQualification fromString(String text) {
+        for (MasterQualification b : MasterQualification.values()) {
+            if (b.qualification.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
