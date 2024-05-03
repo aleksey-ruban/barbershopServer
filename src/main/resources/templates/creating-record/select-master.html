@@ -11,7 +11,7 @@
         <div class="container">
             <h1 class="select-master-header">Выберите специалиста</h1>
             <div class="masters-container">
-                <div class="any-master-card master-card" data-master-id="0" onclick="selectMaster(event)">
+                <div class="any-master-card master-card" data-master-id="-1" onclick="selectMaster(event)">
                     <img src="/static/css/images/audience.svg" alt="Любой специалист" class="any-master-icon">
                     <div>Любой специалист</div>
                     <input type="radio", name="master" value="any">
@@ -21,7 +21,7 @@
                         <div th:replace="~{parts/master-card :: masterCard}"></div>
                     </div>
                 </div>
-                <button class="select-service">
+                <button id="select-service-button" class="select-service">
                     Выбрать услугу
                 </button>
             </div>
