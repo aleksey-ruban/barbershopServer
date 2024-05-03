@@ -30,6 +30,8 @@ function selectService(event) {
     } else {
         hideButton();
     }
+
+    updateSelectionInfo();
 }
 
 function showButton() {
@@ -42,6 +44,28 @@ function hideButton() {
     button.style.display = "none";
 }
 
+function updateSelectionInfo() {
+    var selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+    var totalCoast = 0;
+
+    for (var i = 0; i < selectedCheckboxes.length; i++) {
+        var serviceCard = selectedCheckboxes[i].closest(".service-card");
+        var coastEl = serviceCard.querySelector(".service-name-coast > :nth-child(2)")
+
+        var coast = coastEl.textContent.replace(/ /g, "");
+        coast = coast.substring(0, coast.length - 1);
+        coast = parseInt(coast);
+
+        totalCoast += coast;
+    }
+
+    var countP = document.querySelector(".services-number");
+    var coastP = document.querySelector(".services-coast");
+
+    countP.innerHTML = selectedCheckboxes.length + " услуги";
+    coastP.innerHTML = totalCoast + " ₽";
+}
 
 window.addEventListener("load", function() {
     hideButton();
