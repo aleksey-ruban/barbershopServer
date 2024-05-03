@@ -5,6 +5,7 @@
 @import url("/static/css/styles/select-service-style.css");
 @import url("/static/css/styles/select-date-style.css");
 @import url("/static/css/styles/account-style.css");
+@import url("/static/css/styles/admin.css");
 
 :root {
     --color: rgb(0, 0, 0);
