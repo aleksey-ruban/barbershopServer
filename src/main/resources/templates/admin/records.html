@@ -1,9 +1,15 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .header-nav > :nth-child(3) {
+            color: black;
+            background-color: white;
+        }
+    </style>
 </head>
 <body class="body" id="body-admin">
     <div th:replace="~{parts/header-admin :: headerAdmin}"></div>
