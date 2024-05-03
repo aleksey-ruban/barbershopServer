@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="body" id="body-admin">
+    <div th:replace="~{parts/header-admin :: headerAdmin}"></div>
+    <div class="container">
+        <div class="actions-container">
+            <div class="action-card">
+                <h2>Закрыть запись</h2>
+                <form id="postFrom">
+                    <label for="id1">Идентификатор:</label>
+                    <input type="text" id="id1" name="serviceId" required placeholder="Введите идентификатор">
+    
+                    <input type="submit" value="Закрыть">
+                </form>
+            </div>
+            <div class="action-card">
+                <h2>Получить ID записи</h2>
+                <form id="getFrom">
+                    <label for="emailClient">Почта клиента:</label>
+                    <input type="email" id="emailClient" name="clientEmail" placeholder="Введите почту">
+                    
+                    <label for="masterName">Имя мастера:</label>
+                    <input type="text" id="masterName" name="masterName" placeholder="Введите имя">
+
+                    <label for="recordTime">Дата и время:</label>
+                    <input type="datetime-local" id="recordTime" name="recordTime">
+
+                    <input type="submit" value="Запросить">
+                </form>
+                <h4>Здесь появится ID</h4>
+            </div>
+            <div class="action-card">
+                <h2>Отменить запись</h2>
+                <form id="deleteFrom">
+                    <label for="idMaster">Идентификатор:</label>
+                    <input type="number" id="idMaster" name="idMaster" required placeholder="Введите идентификатор">
+                    
+                    <input type="submit" value="Отменить">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
