@@ -9,5 +9,6 @@ public interface MasterService {
     Master create(MasterDTO masterDTO);
     List<Master> readAll();
     Long getId(String name);
+    Master getById(Long id);
     void delete(Long id);
 }

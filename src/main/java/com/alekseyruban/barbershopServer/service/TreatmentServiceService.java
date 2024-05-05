@@ -8,6 +8,7 @@ import java.util.List;
 public interface TreatmentServiceService {
     TreatmentService create(TreatmentServiceDTO treatmentServiceDTO);
     List<TreatmentService> readAll();
+    List<TreatmentService> readAllById(List<Long> ids);
     Long getId(String name);
     void delete(Long id);
 }

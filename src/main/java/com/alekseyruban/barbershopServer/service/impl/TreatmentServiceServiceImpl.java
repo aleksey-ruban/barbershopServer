@@ -37,6 +37,11 @@ public class TreatmentServiceServiceImpl implements TreatmentServiceService {
     }
 
     @Override
+    public List<TreatmentService> readAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
+
+    @Override
     public Long getId(String name) {
         Optional<TreatmentService> treatmentService = repository.findByName(name);
         return treatmentService.map(TreatmentService::getId).orElse(null);

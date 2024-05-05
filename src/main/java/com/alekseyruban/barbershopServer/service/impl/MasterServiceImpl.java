@@ -42,6 +42,13 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public Master getById(Long id) {
+        Optional<Master> master = repository.findById(id);
+        return master.orElse(null);
+    }
+
+
+    @Override
     public void delete(Long id) {
         repository.deleteById(id);
     }
