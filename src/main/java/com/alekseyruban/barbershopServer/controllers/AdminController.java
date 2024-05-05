@@ -3,11 +3,14 @@ package com.alekseyruban.barbershopServer.controllers;
 import com.alekseyruban.barbershopServer.dto.MasterDTO;
 import com.alekseyruban.barbershopServer.dto.TreatmentServiceDTO;
 import com.alekseyruban.barbershopServer.entity.Master;
+import com.alekseyruban.barbershopServer.entity.Record;
 import com.alekseyruban.barbershopServer.entity.TreatmentService;
 import com.alekseyruban.barbershopServer.enums.MasterQualification;
 import com.alekseyruban.barbershopServer.service.MasterService;
+import com.alekseyruban.barbershopServer.service.RecordService;
 import com.alekseyruban.barbershopServer.service.TreatmentServiceService;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 @Controller
 @RequestMapping({"/admin/", "/admin"})
@@ -25,6 +32,7 @@ public class AdminController {
 
     private final MasterService masterService;
     private final TreatmentServiceService treatmentServiceService;
+    private final RecordService recordService;
 
     @GetMapping({"", "/"})
     public String defaultPage () {
@@ -95,9 +103,36 @@ public class AdminController {
         treatmentServiceService.delete(idService);
     }
 
-    @GetMapping({"/records", "/records/"})
-    public String records() {
+    @RequestMapping(value = {"/records", "/records/"}, method = RequestMethod.PUT)
+    public void closeRecord(@RequestParam Long recordId) {
+        recordService.close(recordId);
+    }
+
+    @RequestMapping(value = {"/records", "/records/"}, method = RequestMethod.GET)
+    public String getRecordId(@RequestParam(value = "clientEmail", required = false) String clientEmail,
+                              @RequestParam(value = "masterName", required = false) String masterName,
+                              @RequestParam(value = "recordTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
+                              Model model) {
+
+        if ((clientEmail == null && masterName == null) || dateTime == null) {
+            model.addAttribute("recordId", "Здесь появится ID");
+        } else {
+            LocalDate date = dateTime.toLocalDate();
+            LocalTime time = dateTime.toLocalTime();
+            Long recordId = recordService.getId(clientEmail, masterName, date, time);
+            if (recordId == null) {
+                model.addAttribute("recordId","Такой записи нет");
+            } else {
+                model.addAttribute("recordId", "ID записи: " + recordId);
+            }
+        }
+
         return "admin/records";
+    }
+
+    @RequestMapping(value = {"/records", "/records/"}, method = RequestMethod.DELETE)
+    public void deleteRecord(@RequestParam Long recordId) {
+        recordService.delete(recordId);
     }
 
 }
