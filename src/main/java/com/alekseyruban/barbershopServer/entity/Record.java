@@ -2,12 +2,17 @@ package com.alekseyruban.barbershopServer.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 @Entity
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Record {
@@ -24,10 +29,13 @@ public class Record {
     private Master master;
 
     @ManyToMany
-    private Set<TreatmentService> services;
+    private List<TreatmentService> services;
 
-    @Column(name = "date_time", columnDefinition = "TIMESTAMP")
-    private LocalDateTime dateTime;
+    @Column(name = "date", columnDefinition = "DATE")
+    private LocalDate date;
+
+    @Column(name = "time", columnDefinition = "TIME")
+    private LocalTime time;
 
     private Boolean isDone;
 }
