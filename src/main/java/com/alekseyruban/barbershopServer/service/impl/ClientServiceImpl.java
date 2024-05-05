@@ -48,6 +48,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public Client getById(Long id) {
+        Optional<Client> client = repository.findById(id);
+        return client.orElse(null);
+    }
+
+    @Override
     public Client restorePassword(String email) {
 
         Optional<Client> clientOptional = repository.findByEmail(email);
