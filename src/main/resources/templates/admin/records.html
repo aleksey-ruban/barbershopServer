@@ -19,14 +19,14 @@
                 <h2>Закрыть запись</h2>
                 <form id="postForm">
                     <label for="id1">Идентификатор:</label>
-                    <input type="text" id="id1" name="serviceId" required placeholder="Введите идентификатор">
+                    <input type="text" id="id1" name="recordId" required placeholder="Введите идентификатор">
     
                     <input type="submit" value="Закрыть">
                 </form>
             </div>
             <div class="action-card">
                 <h2>Получить ID записи</h2>
-                <form id="getFrom">
+                <form id="getFrom"  action="/admin/records/" method="get">
                     <label for="emailClient">Почта клиента:</label>
                     <input type="email" id="emailClient" name="clientEmail" placeholder="Введите почту">
                     
@@ -38,19 +38,19 @@
 
                     <input type="submit" value="Запросить">
                 </form>
-                <h4>Здесь появится ID</h4>
+                <h4 th:text="${recordId}"></h4>
             </div>
             <div class="action-card">
                 <h2>Отменить запись</h2>
                 <form id="deleteForm">
-                    <label for="idMaster">Идентификатор:</label>
-                    <input type="number" id="idMaster" name="idMaster" required placeholder="Введите идентификатор">
+                    <label for="recordId">Идентификатор:</label>
+                    <input type="number" id="recordId" name="recordId" required placeholder="Введите идентификатор">
                     
                     <input type="submit" value="Отменить">
                 </form>
             </div>
         </div>
     </div>
-    
+    <script src="/static/js/admin-record.js"></script>
 </body>
 </html>
