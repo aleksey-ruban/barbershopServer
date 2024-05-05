@@ -15,9 +15,6 @@ function configureCalendar(changeMounth=false) {
     if (changeMounth) {
         currentMounth = selectedMounth;
     }
-    // } else {
-    //     selectedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    // }
 
     var firstDayCurrentMounth = new Date(currentYear, currentMounth, 1);
     
@@ -36,17 +33,18 @@ function configureCalendar(changeMounth=false) {
         var onclick = ' onclick="selectDate(event)"';
         
         var q = "";
-        if (i % 5 == 2) { 
+        
+        var someCalendarDayString = "" + someCalendarDay.getFullYear() + "-" + (someCalendarDay.getMonth() + 1 < 10 ? ("0" + (someCalendarDay.getMonth() + 1)) : (someCalendarDay.getMonth() + 1)) + "-" + (someCalendarDay.getDate() < 10 ? ("0" + someCalendarDay.getDate()) : (someCalendarDay.getDate()));
+        if (!(someCalendarDayString in schedule) || (someCalendarDay < new Date().setDate(today.getDate() - 1))) {
             q = " calendar-view-day-unabled";
             onclick = '';
         }
-        var dateString = someCalendarDay.toString();
 
         if (selectedDate?.toString() == someCalendarDay.toString()) {
             q = " calendar-view-day-selected";
         }
         
-        daysHtml += '<div class="calendar-view-day'+ q + '"' + 'data-date="' + dateString + '"' + onclick + '>' + someCalendarDay.getDate() + "</div>";
+        daysHtml += '<div class="calendar-view-day'+ q + '"' + 'data-date="' + someCalendarDayString + '"' + onclick + '>' + someCalendarDay.getDate() + "</div>";
         i += 1;
         someCalendarDay.setDate(someCalendarDay.getDate() + 1);
     }
@@ -88,7 +86,8 @@ function selectDate(event) {
     var target = event.target;
     var newDate = new Date(target.getAttribute("data-date"));
     selectedDate = new Date(newDate);
-    console.log(selectedDate);
+    var selectedDayString = "" + selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1 < 10 ? ("0" + (selectedDate.getMonth() + 1)) : (selectedDate.getMonth() + 1)) + "-" + (selectedDate.getDate() < 10 ? ("0" + selectedDate.getDate()) : (selectedDate.getDate()));
+    configureTimes(selectedDayString);
 
     var selectedDays = document.querySelectorAll(".calendar-view-day-selected");
 
@@ -97,19 +96,21 @@ function selectDate(event) {
     }
 
     target.classList.add("calendar-view-day-selected");
+    
     showTimes();
     unselectTime();
 }
 
 
-function configureTimes(list=[[9, 0], [10, 30], [11, 30], [13, 0], [15, 0]]) {
+function configureTimes(selectedDate) {
+    var list = schedule[selectedDate];
+
     var timesGrid = document.getElementsByClassName("time-view")[0]
 
     var timesHtml = '';
     for (var i = 0; i < list.length; i++) {
-        var hours = list[i][0];
-        var minutes = list[i][1] == 0 ? "00" : list[i][1]
-        timesHtml += '<div data-hours="' + hours + '" data-minutes="' + minutes + '" onclick="selectTime(event)">' + hours + ':' + minutes + '</div>';
+        var displayTime = list[i].substring(0, list[i].length - 3);
+        timesHtml += '<div data-record-time="' + list[i] + '" onclick="selectTime(event)">' + displayTime + '</div>';
     }
 
     timesGrid.innerHTML = timesHtml;
@@ -124,8 +125,7 @@ function selectTime(event) {
         selectedTimes[i].classList.remove("selected-time");
     }
 
-    selectedTime = [target.getAttribute("data-hours"), target.getAttribute("data-minutes")];
-    console.log(selectedTime);
+    selectedTime = target.getAttribute("data-record-time");
 
     target.classList.add("selected-time");
     showDoneButton();
@@ -168,8 +168,29 @@ function hideTimes() {
 
 window.addEventListener("load", function() {
     configureCalendar();
-    configureTimes();
     hideDoneButton();
     hideTimes();
 });
 
+document.querySelector(".create-record-button").addEventListener("click", function() {
+    var searchString = window.location.search;
+    var searchParams = new URLSearchParams(searchString);
+    var paramsPart = searchParams.toString();
+
+    var url = "/record/save-record";
+    var queryString = "?" + paramsPart + "&";
+    
+    var dateString = "" + selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1 < 10 ? ("0" + (selectedDate.getMonth() + 1)) : (selectedDate.getMonth() + 1)) + "-" + (selectedDate.getDate() < 10 ? ("0" + selectedDate.getDate()) : (selectedDate.getDate()));
+    queryString += "date=" + dateString + "&";
+    queryString += "time=" + selectedTime;
+
+    fetch(url + queryString, {
+        method: "POST"
+    }).then(response => {
+        console.log("POST запрос выполнен успешно");
+        window.location.href = "/authorization/account";
+    }).catch(error => {
+        console.error('Ошибка при отправке запроса:', error);
+    });
+
+});

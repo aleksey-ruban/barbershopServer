@@ -1,0 +1,9 @@
+<div class="record-details-wrapper" th:fragment="record" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p class="master-title detail-title">Мастер:</p>
+    <p class="record-info-value record-master-name" th:text="${masterName}">Антон</p>
+    <p class="record-info-value record-master-qualification" th:text="${masterQualification}">БРЕНД-БАРБЕР СЕТИ BRILLANT</p>
+    <p class="record-info-value record-time-value" th:text="${dateAndTime}">23 апреля, 10:30</p>
+    <p class="detail-title">Услуги:</p>
+    <p class="record-info-value services-list" th:text="${recordServices}">МУЖСКАЯ СТРИЖКА НОЖНИЦАМИ</p>
+    <button class="delete-record-button" th:attr="record-id=${recordId}">Отменить</button>
+</div>

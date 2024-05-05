@@ -13,18 +13,18 @@
             <div class="info-container">
                 <div class="account-info">
                     <p class="account-info-label">Имя:</p>
-                    <p class="account-info-value value-name">Алексей</p>
+                    <p class="account-info-value value-name" th:text="${name}"></p>
                     <p class="account-info-label">Почта:</p>
-                    <p class="account-info-value value-email">alekseyruban555@gmail.com</p>
+                    <p class="account-info-value value-email" th:text="${email}"></p>
                 </div>
                 <div class="record-info">
                     <h1 class="record-info-title">Запись</h1>
-                    <p class="master-title detail-title">Мастер:</p>
-                    <p class="record-info-value record-master-name">Антон</p>
-                    <p class="record-info-value record-master-qualification">БРЕНД-БАРБЕР СЕТИ BRILLANT</p>
-                    <p class="record-info-value record-time-value">23 апреля, 10:30</p>
-                    <p class="detail-title">Услуги:</p>
-                    <p class="record-info-value services-list">МУЖСКАЯ СТРИЖКА НОЖНИЦАМИ</p>
+                    <div th:if="${hasRecord}">
+                        <div th:replace="~{parts/account-record :: record}"></div>
+                    </div>
+                    <div th:if="${!hasRecord}">
+                        <div th:replace="~{parts/account-newrecord :: newrecord}"></div>
+                    </div>
                 </div>
                 <div class="account-controll-buttons">
                     <button class="account-logout">Выйти</button>
@@ -35,6 +35,7 @@
     </main>
     <div th:replace="~{parts/footer :: footer}"></div>
     <script src="/static/js/show-contacts.js"></script>
+    <script src="/static/js/account.js"></script>
 </body>
 
 </html>
