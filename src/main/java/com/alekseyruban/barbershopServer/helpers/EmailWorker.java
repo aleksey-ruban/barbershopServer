@@ -33,7 +33,7 @@ public class EmailWorker {
                 props.put("mail.smtp.host", host);
                 props.put("mail.smtp.port", "587");
 
-                String link = "10.0.1.2:8080/authorization/confirm-email/" + token.getToken();
+                String link = "10.0.1.2:8080/authorization/confirm-email/" + token.getToken() + "_" + token.getClient().getId();
 
 
                 Session session = Session.getInstance(props,
