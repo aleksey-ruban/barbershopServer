@@ -8,4 +8,5 @@ public interface ClientService {
     Client confirmEmail(Client client);
     Client getById(Long id);
     Client restorePassword(String email);
+    void delete(Long id);
 }

@@ -11,6 +11,7 @@ public interface RecordService {
     Record create(RecordDTO recordDTO);
     List<Record> readInRangeForMaster(Long masterId, LocalDate start, LocalDate end);
     List<Record> readByClientIdAndIsDone(Long clientId, Boolean isDone);
+    List<Record> readByClientId(Long clientdId);
     Long getId(String clientEmail, String masterName, LocalDate date, LocalTime time);
     Record close(Long id);
     void delete(Long id);

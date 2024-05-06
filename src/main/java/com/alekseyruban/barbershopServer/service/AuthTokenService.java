@@ -5,6 +5,6 @@ import com.alekseyruban.barbershopServer.entity.AuthorizationToken;
 
 public interface AuthTokenService {
     AuthorizationToken createToken(AuthTokenDTO tokenDTO);
-    AuthorizationToken confirmEmail(AuthTokenDTO tokenDTO);
+    AuthorizationToken getByClientId(Long clientId);
     void deleteToken(Long id);
 }

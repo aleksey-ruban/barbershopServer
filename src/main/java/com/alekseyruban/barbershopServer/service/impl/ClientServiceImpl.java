@@ -35,9 +35,7 @@ public class ClientServiceImpl implements ClientService {
                 .build();
 //        client.setPassword(passwordEncoder.encode(client.getPassword()));
 
-        Client savedClient = repository.save(client);
-
-        return savedClient;
+        return repository.save(client);
     }
 
     @Override
@@ -73,6 +71,11 @@ public class ClientServiceImpl implements ClientService {
         }
 
         return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     private Client mapToClient(ClientDTO dto) {
