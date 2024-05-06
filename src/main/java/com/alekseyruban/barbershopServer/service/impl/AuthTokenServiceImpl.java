@@ -7,17 +7,19 @@ import com.alekseyruban.barbershopServer.helpers.RandomGenerator;
 import com.alekseyruban.barbershopServer.repository.AuthorizationTokenRepository;
 import com.alekseyruban.barbershopServer.service.AuthTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthTokenServiceImpl implements AuthTokenService {
 
     private final AuthorizationTokenRepository repository;
-//    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthTokenServiceImpl(AuthorizationTokenRepository repository) {
+    public AuthTokenServiceImpl(AuthorizationTokenRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class AuthTokenServiceImpl implements AuthTokenService {
                 .client(tokenDTO.getClient())
                 .token(tokenValue)
                 .build();
-//        token.setToken(passwordEncoder.encode(token.getToken()));
+        token.setToken(passwordEncoder.encode(token.getToken()));
 
         tokenDTO.setToken(tokenValue);
         EmailWorker.sendConfirmEmail(tokenDTO);
