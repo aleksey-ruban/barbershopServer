@@ -3,7 +3,6 @@ package com.alekseyruban.barbershopServer.controllers;
 import com.alekseyruban.barbershopServer.dto.MasterDTO;
 import com.alekseyruban.barbershopServer.dto.TreatmentServiceDTO;
 import com.alekseyruban.barbershopServer.entity.Master;
-import com.alekseyruban.barbershopServer.entity.Record;
 import com.alekseyruban.barbershopServer.entity.TreatmentService;
 import com.alekseyruban.barbershopServer.enums.MasterQualification;
 import com.alekseyruban.barbershopServer.service.MasterService;
@@ -113,8 +112,7 @@ public class AdminController {
                               @RequestParam(value = "masterName", required = false) String masterName,
                               @RequestParam(value = "recordTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
                               Model model) {
-
-        if ((clientEmail == null && masterName == null) || dateTime == null) {
+        if (((clientEmail == null || clientEmail.equals("")) && masterName == null) || dateTime == null) {
             model.addAttribute("recordId", "Здесь появится ID");
         } else {
             LocalDate date = dateTime.toLocalDate();
