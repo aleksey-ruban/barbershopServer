@@ -40,7 +40,13 @@ function configureCalendar(changeMounth=false) {
             onclick = '';
         }
 
-        if (selectedDate?.toString() == someCalendarDay.toString()) {
+        let copy1 = new Date(selectedDate);
+        let copy2 = new Date(someCalendarDay);
+
+        copy1.setHours(0, 0, 0, 0);
+        copy2.setHours(0, 0, 0, 0);
+        
+        if (copy1.getTime() === copy2.getTime()) {
             q = " calendar-view-day-selected";
         }
         

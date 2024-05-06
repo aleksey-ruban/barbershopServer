@@ -5,6 +5,7 @@ import com.alekseyruban.barbershopServer.entity.Client;
 import com.alekseyruban.barbershopServer.entity.Master;
 import com.alekseyruban.barbershopServer.entity.Record;
 import com.alekseyruban.barbershopServer.entity.TreatmentService;
+import com.alekseyruban.barbershopServer.security.CustomUserDetails;
 import com.alekseyruban.barbershopServer.service.ClientService;
 import com.alekseyruban.barbershopServer.service.MasterService;
 import com.alekseyruban.barbershopServer.service.RecordService;
@@ -12,6 +13,10 @@ import com.alekseyruban.barbershopServer.service.TreatmentServiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +44,27 @@ public class RecordController {
 
     @GetMapping({"", "/"})
     public String defaulPage() {
+        return "redirect:/record/select-master";
+    }
+
+    @GetMapping({"/start", "/start/"})
+    public String start() {
+        Long userId = null;
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof CustomUserDetails userDetails) {
+                userId = userDetails.getId();
+            }
+        }
+        if (userId == null) {
+            return "redirect:/authorization/signin";
+        }
+        List<Record> recordList = recordService.readByClientIdAndIsDone(userId, false).stream().filter(r -> r.getDate().atTime(r.getTime()).compareTo(LocalDateTime.now()) >= 0).toList();
+        if (recordList.size() > 0) {
+            return "redirect:/authorization/account";
+        }
         return "redirect:/record/select-master";
     }
 
@@ -123,7 +150,16 @@ public class RecordController {
                                              @RequestParam(value = "service-id") List<Long> serviceIds,
                                              @RequestParam(value = "date") String date,
                                              @RequestParam(value = "time") String time) {
-        Client client = clientService.getById(1L);
+        Long userId = null;
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof CustomUserDetails userDetails) {
+                userId = userDetails.getId();
+            }
+        }
+        Client client = clientService.getById(userId);
         Master master = masterService.getById(masterId);
         List<TreatmentService> services = treatmentServiceService.readAllById(serviceIds);
         RecordDTO recordDTO = RecordDTO.builder()
