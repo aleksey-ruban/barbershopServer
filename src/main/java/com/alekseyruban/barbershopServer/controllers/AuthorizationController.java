@@ -59,22 +59,22 @@ public class AuthorizationController {
     }
 
     @GetMapping(value = "/confirm-email/{token}")
-    public String confirmEmail(@PathVariable String token) {
+    public String confirmEmail(@PathVariable(value = "token") String tokenPart) {
+
+        String token = tokenPart.split("_")[0];
+        Long clientId = Long.parseLong(tokenPart.split("_")[1]);
+
         AuthTokenDTO tokenDTO = AuthTokenDTO.builder()
                 .token(token)
                 .build();
 
-        AuthorizationToken authorizationToken = authTokenService.confirmEmail(tokenDTO);
+        AuthorizationToken authorizationToken = authTokenService.getByClientId(clientId);
 
-        if (authorizationToken == null) {
-            return null;
+        if (passwordEncoder.matches(token, authorizationToken.getToken())) {
+            Client client = clientService.confirmEmail(authorizationToken.getClient());
+            authTokenService.deleteToken(authorizationToken.getId());
+            EmailWorker.successEmail(client.getEmail());
         }
-
-        Client client = clientService.confirmEmail(authorizationToken.getClient());
-
-        authTokenService.deleteToken(authorizationToken.getId());
-
-        EmailWorker.successEmail(client.getEmail());
 
         return "redirect:/authorization/signin";
     }
