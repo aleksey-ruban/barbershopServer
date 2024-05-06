@@ -22,4 +22,6 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     Record findByEmailAndDatetime(@Param("email") String email, @Param("date") LocalDate date, @Param("time") LocalTime time);
 
     List<Record> findByClientIdAndIsDone(Long clientId, Boolean isDone);
+
+    List<Record> findByClientId(Long clientId);
 }
