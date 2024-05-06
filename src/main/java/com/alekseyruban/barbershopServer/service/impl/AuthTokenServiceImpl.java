@@ -35,15 +35,8 @@ public class AuthTokenServiceImpl implements AuthTokenService {
     }
 
     @Override
-    public AuthorizationToken confirmEmail(AuthTokenDTO tokenDTO) {
-//        tokenDTO.setToken(passwordEncoder.encode(tokenDTO.getToken()));
-        AuthorizationToken token = repository.findByToken(tokenDTO.getToken());
-
-        if (token == null) {
-            return null;
-        }
-
-        return token;
+    public AuthorizationToken getByClientId(Long clientId) {
+        return repository.findByClientId(clientId);
     }
 
     @Override

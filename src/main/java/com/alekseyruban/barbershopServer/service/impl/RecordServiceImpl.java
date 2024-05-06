@@ -47,18 +47,22 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    public List<Record> readByClientId(Long clientId) {
+        return repository.findByClientId(clientId);
+    }
+
+    @Override
     public Long getId(String clientEmail, String masterName, LocalDate date, LocalTime time) {
         if (clientEmail == null && masterName == null) {
             return null;
         }
         Record record;
-        if (clientEmail != null) {
+        if (clientEmail != null && !clientEmail.equals("")) {
             record = repository.findByEmailAndDatetime(clientEmail, date, time);
         } else {
             record = repository.findByMasterNameAndDatetime(masterName, date, time);
         }
         return record == null ? null : record.getId();
-
     }
 
     @Override
