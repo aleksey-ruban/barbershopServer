@@ -7,6 +7,7 @@ import com.alekseyruban.barbershopServer.helpers.RandomGenerator;
 import com.alekseyruban.barbershopServer.repository.ClientRepository;
 import com.alekseyruban.barbershopServer.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,11 +17,12 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository repository;
-//    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository repository) {
+    public ClientServiceImpl(ClientRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class ClientServiceImpl implements ClientService {
                 .isConfirmed(false)
                 .roles("CLIENT")
                 .build();
-//        client.setPassword(passwordEncoder.encode(client.getPassword()));
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
 
         return repository.save(client);
     }
@@ -61,7 +63,7 @@ public class ClientServiceImpl implements ClientService {
 
             Client client = clientOptional.get();
             client.setPassword(password);
-//            client.setPassword(passwordEncoder.encode(client.getPassword()));
+            client.setPassword(passwordEncoder.encode(client.getPassword()));
 
             Client savedClient = repository.save(client);
 
