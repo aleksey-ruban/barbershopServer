@@ -7,11 +7,19 @@ import com.alekseyruban.barbershopServer.entity.Client;
 import com.alekseyruban.barbershopServer.entity.Record;
 import com.alekseyruban.barbershopServer.entity.TreatmentService;
 import com.alekseyruban.barbershopServer.helpers.EmailWorker;
+import com.alekseyruban.barbershopServer.security.CustomUserDetails;
 import com.alekseyruban.barbershopServer.service.AuthTokenService;
 import com.alekseyruban.barbershopServer.service.ClientService;
 import com.alekseyruban.barbershopServer.service.RecordService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +39,22 @@ public class AuthorizationController {
     private final ClientService clientService;
     private final AuthTokenService authTokenService;
     private final RecordService recordService;
+    private final PasswordEncoder passwordEncoder;
+
 
     @GetMapping({"", "/"})
     public String defaultPage() {
+        if (isClientAuthorized()) {
+            return "redirect:/authorization/account";
+        }
         return "redirect:/authorization/signin";
     }
 
     @GetMapping({"/signup", "/signup/"})
     public String signup() {
+        if (isClientAuthorized()) {
+            return "redirect:/authorization/account";
+        }
         return "authorization/signup";
     }
 
@@ -79,13 +95,19 @@ public class AuthorizationController {
         return "redirect:/authorization/signin";
     }
 
-    @GetMapping({"/signin", "/signin/"})
+    @GetMapping("/signin")
     public String signin() {
+        if (isClientAuthorized()) {
+            return "redirect:/authorization/account";
+        }
         return "authorization/signin";
     }
 
     @GetMapping({"/restore-password", "/restore-password/"})
     public String restorePassword() {
+        if (isClientAuthorized()) {
+            return "redirect:/authorization/account";
+        }
         return "authorization/restore-password";
     }
 
@@ -99,7 +121,18 @@ public class AuthorizationController {
 
     @GetMapping({"/account", "/account/"})
     public String account(Model model) {
-        Long userId = 1L;
+        Long userId = null;
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof CustomUserDetails userDetails) {
+                userId = userDetails.getId();
+            }
+        }
+        if (userId == null) {
+            return "redirect:/authorization/signin";
+        }
         Client client = clientService.getById(userId);
 
         model.addAttribute("name", client.getName());
@@ -137,5 +170,42 @@ public class AuthorizationController {
 
         return "authorization/account";
     }
+
+    @RequestMapping(value = {"/account", "/account/"}, method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteAccount() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof CustomUserDetails) {
+                CustomUserDetails userDetails = (CustomUserDetails) principal;
+                Long userId = userDetails.getId();
+
+                Client client = clientService.getById(userId);
+                System.out.println(client.getEmail());
+
+                for (Record r : recordService.readByClientId(userId)) {
+                    System.out.println(r.getId() + " id");
+                    recordService.delete(r.getId());
+                }
+
+                clientService.delete(userId);
+            }
+        }
+        return new ResponseEntity<>("Account deleted", HttpStatus.OK);
+    }
+
+    private boolean isClientAuthorized() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            for (GrantedAuthority auth : authentication.getAuthorities()) {
+                if (auth.getAuthority().equals("CLIENT") || auth.getAuthority().equals("ADMIN")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
