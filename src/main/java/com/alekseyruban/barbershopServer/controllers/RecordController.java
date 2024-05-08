@@ -13,7 +13,6 @@ import com.alekseyruban.barbershopServer.service.TreatmentServiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +42,7 @@ public class RecordController {
     private final RecordService recordService;
 
     @GetMapping({"", "/"})
-    public String defaulPage() {
+    public String defaultPage() {
         return "redirect:/record/select-master";
     }
 
@@ -62,7 +61,7 @@ public class RecordController {
             return "redirect:/authorization/signin";
         }
         List<Record> recordList = recordService.readByClientIdAndIsDone(userId, false).stream().filter(r -> r.getDate().atTime(r.getTime()).compareTo(LocalDateTime.now()) >= 0).toList();
-        if (recordList.size() > 0) {
+        if (!recordList.isEmpty()) {
             return "redirect:/authorization/account";
         }
         return "redirect:/record/select-master";
@@ -88,8 +87,8 @@ public class RecordController {
         Map<LocalDate, LocalTime[]> schedule = new HashMap<>();
 
         LocalDate today = LocalDate.now();
-        LocalDate start = LocalDate.of(today.getYear(), today.getMonthValue() - 1, 22);
-        LocalDate end = LocalDate.of(today.getYear(), today.getMonthValue() + 1, 7);
+        LocalDate start = LocalDate.from(today);
+        LocalDate end = LocalDate.from(today).plusDays(31);
 
         if (masterId == null) {
             while (!start.isEqual(end)) {
@@ -118,14 +117,14 @@ public class RecordController {
             LocalTime busyUpTo = LocalTime.of(8, 0);
             for (int i = 0; i < 24; i++) {
                 LocalTime finalCurrentTime = currentTime;
-                List<Record> currentTimeRecords = recordsOfDay.stream().filter(r -> r.getTime().compareTo(finalCurrentTime) == 0).toList();
-                if (currentTimeRecords.size() > 0) {
+                List<Record> currentTimeRecords = recordsOfDay.stream().filter(r -> r.getTime().equals(finalCurrentTime)).toList();
+                if (!currentTimeRecords.isEmpty()) {
                     Record currentTimeRecord = currentTimeRecords.get(0);
                     int duration = currentTimeRecord.getServices().stream().mapToInt(TreatmentService::getDuration).sum();
                     busyUpTo = currentTime.plusMinutes(duration);
                 }
 
-                if (currentTime.compareTo(busyUpTo) < 0 || (currentTime.compareTo(LocalTime.now()) < 0 && finalStart.isEqual(LocalDate.now()))) {
+                if (currentTime.isBefore(busyUpTo) || (currentTime.isBefore(LocalTime.now()) && finalStart.isEqual(LocalDate.now()))) {
                     currentTime = currentTime.plusMinutes(30);
                     continue;
                 } else {
